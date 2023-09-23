@@ -12,6 +12,13 @@ For help getting started with Flutter development, view the
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
+## Packages
+
+This project uses the following packages:
+    - go_router (^10.1.2): To navigate through screens in a declarative way.
+    - provider (^6.0.5): To share data between multiple screens.
+    - responsive_sizer: (^3.2.0): To build UI for every device screen size.
+
 ## Assets
 
 The `assets` directory houses images, fonts, and any other files you want to
