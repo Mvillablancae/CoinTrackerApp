@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'features/sample_feature/sample_item_details_view.dart';
 import 'features/sample_feature/sample_item_list_view.dart';
-import 'features/settings/settings_controller.dart';
-import 'features/settings/settings_view.dart';
+import 'core/settings/settings_controller.dart';
+import 'core/settings/settings_view.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({
+class CoinTrackerApp extends StatelessWidget {
+  const CoinTrackerApp({
     super.key,
     required this.settingsController,
   });

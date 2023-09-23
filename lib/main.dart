@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'src/app.dart';
-import 'src/features/settings/settings_controller.dart';
-import 'src/features/settings/settings_service.dart';
+import 'src/core/settings/settings_controller.dart';
+import 'src/core/settings/settings_service.dart';
 
 void main() async {
   // Set up the SettingsController, which will glue user settings to multiple
@@ -16,5 +16,5 @@ void main() async {
   // Run the app and pass in the SettingsController. The app listens to the
   // SettingsController for changes, then passes it further down to the
   // SettingsView.
-  runApp(MyApp(settingsController: settingsController));
+  runApp(CoinTrackerApp(settingsController: settingsController));
 }
