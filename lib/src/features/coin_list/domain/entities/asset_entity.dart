@@ -13,9 +13,9 @@ class Asset extends Equatable {
   final DateTime dataTradeStart;
   final DateTime dataTradeEnd;
   final int dataSymbolsCount;
-  final double volume1HrsUsd;
-  final double volume1DayUsd;
-  final double volume1MthUsd;
+  final double volume_1hrsUsd;
+  final double volume_1dayUsd;
+  final double volume_1mthUsd;
   final double priceUsd;
 
   const Asset({
@@ -31,9 +31,9 @@ class Asset extends Equatable {
     required this.dataTradeStart,
     required this.dataTradeEnd,
     required this.dataSymbolsCount,
-    required this.volume1HrsUsd,
-    required this.volume1DayUsd,
-    required this.volume1MthUsd,
+    required this.volume_1hrsUsd,
+    required this.volume_1dayUsd,
+    required this.volume_1mthUsd,
     required this.priceUsd,
   });
 
@@ -52,9 +52,9 @@ class Asset extends Equatable {
         dataTradeStart.millisecondsSinceEpoch,
         dataTradeEnd.millisecondsSinceEpoch,
         dataSymbolsCount,
-        volume1HrsUsd,
-        volume1DayUsd,
-        volume1MthUsd,
+        volume_1hrsUsd,
+        volume_1dayUsd,
+        volume_1mthUsd,
         priceUsd,
       ];
 }

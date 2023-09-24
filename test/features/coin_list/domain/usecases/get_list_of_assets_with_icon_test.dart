@@ -37,9 +37,9 @@ void main() {
         dataTradeStart: DateTime(2023, 9, 24),
         dataTradeEnd: DateTime(2023, 9, 24),
         dataSymbolsCount: 1,
-        volume1HrsUsd: 1.0,
-        volume1DayUsd: 1.0,
-        volume1MthUsd: 1.0,
+        volume_1hrsUsd: 1.0,
+        volume_1dayUsd: 1.0,
+        volume_1mthUsd: 1.0,
         priceUsd: 1)
   ];
   final List<AssetIcon> assetIconList = [
@@ -60,7 +60,7 @@ void main() {
     final result = await usecase(NoParams());
 
     bool isEqual = false;
-    
+
     result.fold((l) => null, (r) {
       isEqual = listEquals(r, assetWithIconList);
     });
