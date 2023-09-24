@@ -2,38 +2,23 @@ import 'package:equatable/equatable.dart';
 
 class Asset extends Equatable {
   final String assetId;
-
   final String name;
-
   final int typeIsCrypto;
-
   final DateTime dataStart;
-
   final DateTime dataEnd;
-
   final DateTime dataQuoteStart;
-
   final DateTime dataQuoteEnd;
-
   final DateTime dataOrderbookStart;
-
   final DateTime dataOrderbookEnd;
-
   final DateTime dataTradeStart;
-
   final DateTime dataTradeEnd;
-
   final int dataSymbolsCount;
-
   final double volume1HrsUsd;
-
   final double volume1DayUsd;
-
   final double volume1MthUsd;
-
   final double priceUsd;
 
-  Asset({
+  const Asset({
     required this.assetId,
     required this.name,
     required this.typeIsCrypto,
@@ -58,14 +43,14 @@ class Asset extends Equatable {
         assetId,
         name,
         typeIsCrypto,
-        dataStart,
-        dataEnd,
-        dataQuoteStart,
-        dataQuoteEnd,
-        dataOrderbookStart,
-        dataOrderbookEnd,
-        dataTradeStart,
-        dataTradeEnd,
+        dataStart.millisecondsSinceEpoch,
+        dataEnd.millisecondsSinceEpoch,
+        dataQuoteStart.millisecondsSinceEpoch,
+        dataQuoteEnd.millisecondsSinceEpoch,
+        dataOrderbookStart.millisecondsSinceEpoch,
+        dataOrderbookEnd.millisecondsSinceEpoch,
+        dataTradeStart.millisecondsSinceEpoch,
+        dataTradeEnd.millisecondsSinceEpoch,
         dataSymbolsCount,
         volume1HrsUsd,
         volume1DayUsd,

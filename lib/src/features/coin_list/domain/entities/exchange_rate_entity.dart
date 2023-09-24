@@ -1,16 +1,16 @@
 import 'package:equatable/equatable.dart';
 
 class ExchangeRate extends Equatable {
-  String timePeriodStart;
-  String timePeriodEnd;
-  String timeOpen;
-  String timeClose;
-  double rateOpen;
-  double rateHigh;
-  double rateLow;
-  double rateClose;
+  final String timePeriodStart;
+  final String timePeriodEnd;
+  final String timeOpen;
+  final String timeClose;
+  final double rateOpen;
+  final double rateHigh;
+  final double rateLow;
+  final double rateClose;
 
-  ExchangeRate(
+  const ExchangeRate(
       {required this.timePeriodStart,
       required this.timePeriodEnd,
       required this.timeOpen,
