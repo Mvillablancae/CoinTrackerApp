@@ -1,0 +1,45 @@
+{
+    // Use IntelliSense para saber los atributos posibles.
+    // Mantenga el puntero para ver las descripciones de los existentes atributos.
+    // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "CoinTracker",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--dart-define-from-file",
+                "keys.json"]
+            },
+        {
+            "name": "CoinTracker (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile",
+            "args": [
+                "--dart-define-from-file",
+                "keys.json"]
+        },
+        {
+            "name": "CoinTracker (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "args": [
+                "--dart-define-from-file",
+                "keys.json"]
+        },
+        {
+            "name": "CoinTracker Test",
+            "request": "launch",
+            "type": "dart",
+            "program": "tests/",
+            "args": [
+                "--dart-define-from-file",
+                "keys.json"]
+            },
+        
+      ]
+
+}

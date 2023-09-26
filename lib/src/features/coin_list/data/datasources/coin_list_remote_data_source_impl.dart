@@ -17,11 +17,18 @@ class CoinListRemoteDataSourceImpl implements CoinListRemoteDataSource {
   @override
   Future<List<Asset>> getListOfAssets() async {
     List<Asset> assetList = [];
+    const coinAPIKEY = String.fromEnvironment('coinAPIKEY');
+    if (coinAPIKEY.isEmpty) {
+      throw AssertionError('coinAPIKEY is not set');
+    }
     final response = await client.get(
       Uri(
         path: 'https://rest.coinapi.io/v1/assets',
       ),
-      headers: {'Content-Type': 'application/json'},
+      headers: {
+        'Content-Type': 'application/json',
+        "X-CoinAPI-Key": coinAPIKEY
+      },
     );
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);

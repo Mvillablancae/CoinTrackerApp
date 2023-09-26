@@ -30,11 +30,15 @@ void main() {
       // act
       remoteDataSource.getListOfAssets();
       // assert
+      const coinAPIKEY = String.fromEnvironment('coinAPIKEY');
+      if (coinAPIKEY.isEmpty) {
+        throw AssertionError('coinAPIKEY is not set');
+      }
       verify(mockClient.get(
         Uri(
           path: 'https://rest.coinapi.io/v1/assets',
         ),
-        headers: {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/json', "X-CoinAPI-Key": coinAPIKEY},
       ));
     });
 

@@ -12,6 +12,22 @@ For help getting started with Flutter development, view the
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
+## Running the project
+
+ First of all, you have to create a new file in the root folder called "keys.json" and add your Coinapi.io APIKEY as:
+
+{
+    "coinAPIKEY": "YOUR_API_KEY"
+}
+
+and add "--dart-define-from-file=api-keys.json" when calling "flutter run".
+
+The next step is to generate the necessary code to run the app with:
+
+dart run build_runner build --delete-conflicting-outputs
+
+Finally you can run the app with "flutter run --dart-define-from-file=api-keys.json"
+
 ## Packages
 
 This project uses the following packages:
