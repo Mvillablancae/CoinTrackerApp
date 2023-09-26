@@ -59,7 +59,7 @@ void main() {
       }
       verify(mockClient.get(
         Uri.parse(
-          '/v1/assets/icons/32',
+          'https://rest.coinapi.io/v1/assets/icons/32',
         ),
         headers: {
           'Content-Type': 'application/json',

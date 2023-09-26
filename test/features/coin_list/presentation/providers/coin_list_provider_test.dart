@@ -65,7 +65,7 @@ void main() {
       await provider.loadListOfAssetsWithIcon();
 
       print(provider.listOfAssets);
-      print("Separador");
+      
       bool verifyEqualLists = listEquals(provider.listOfAssets, [
         AssetWithIcon(
             asset: AssetModel(
