@@ -5,7 +5,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'asset_icon_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class AssetIconModel extends AssetIcon {
   AssetIconModel({required super.assetId, required super.url});
 

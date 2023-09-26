@@ -30,9 +30,15 @@ class CoinListRepositoryImpl implements CoinListRepository {
   }
 
   @override
-  Future<Either<Failure, List<AssetIcon>>> getListOfAssetsIcons() {
-    // TODO: implement getListOfAssetsIcons
-    throw UnimplementedError();
+  Future<Either<Failure, List<AssetIcon>>> getListOfAssetsIcons()async  {
+    networkInfo.isConnected;
+  try {
+    final remoteAssetsIcons =
+        await remoteDataSource.getListOfAssetsIcons();
+    return Right(remoteAssetsIcons);
+  } on ServerException {
+    return Left(ServerFailure());
+  }
   }
 
   @override

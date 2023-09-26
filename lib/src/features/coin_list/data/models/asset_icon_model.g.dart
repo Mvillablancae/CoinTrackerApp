@@ -8,12 +8,12 @@ part of 'asset_icon_model.dart';
 
 AssetIconModel _$AssetIconModelFromJson(Map<String, dynamic> json) =>
     AssetIconModel(
-      assetId: json['assetId'] as String,
+      assetId: json['asset_id'] as String,
       url: json['url'] as String,
     );
 
 Map<String, dynamic> _$AssetIconModelToJson(AssetIconModel instance) =>
     <String, dynamic>{
-      'assetId': instance.assetId,
+      'asset_id': instance.assetId,
       'url': instance.url,
     };

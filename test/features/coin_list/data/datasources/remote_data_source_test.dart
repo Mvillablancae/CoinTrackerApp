@@ -25,7 +25,7 @@ void main() {
     test('should get a list of assets from server', () {
       //arrange
       when(mockClient.get(any, headers: anyNamed('headers'))).thenAnswer(
-        (_) async => http.Response(fixture('asset.json'), 200),
+        (_) async => http.Response(fixture('asset_list.json'), 200),
       );
       // act
       remoteDataSource.getListOfAssets();
@@ -35,10 +35,36 @@ void main() {
         throw AssertionError('coinAPIKEY is not set');
       }
       verify(mockClient.get(
-        Uri(
-          path: 'https://rest.coinapi.io/v1/assets',
+        Uri.parse(
+          'https://rest.coinapi.io/v1/assets',
         ),
-        headers: {'Content-Type': 'application/json', "X-CoinAPI-Key": coinAPIKEY},
+        headers: {
+          'Content-Type': 'application/json',
+          "X-CoinAPI-Key": coinAPIKEY
+        },
+      ));
+    });
+
+    test('should get a list of assetsIcons from server', () {
+      //arrange
+      when(mockClient.get(any, headers: anyNamed('headers'))).thenAnswer(
+        (_) async => http.Response(fixture('asset_icon_list.json'), 200),
+      );
+      // act
+      remoteDataSource.getListOfAssetsIcons();
+      // assert
+      const coinAPIKEY = String.fromEnvironment('coinAPIKEY');
+      if (coinAPIKEY.isEmpty) {
+        throw AssertionError('coinAPIKEY is not set');
+      }
+      verify(mockClient.get(
+        Uri.parse(
+          '/v1/assets/icons/32',
+        ),
+        headers: {
+          'Content-Type': 'application/json',
+          "X-CoinAPI-Key": coinAPIKEY
+        },
       ));
     });
 
@@ -52,7 +78,8 @@ void main() {
         // act
         final call = remoteDataSource.getListOfAssets;
         // assert
-        expect(() async => await call(), throwsA(const TypeMatcher<ServerException>()));
+        expect(() async => await call(),
+            throwsA(const TypeMatcher<ServerException>()));
       },
     );
   });

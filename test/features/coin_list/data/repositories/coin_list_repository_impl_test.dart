@@ -47,7 +47,6 @@ void main() {
         volume_1hrsUsd: 102894431436.49,
         volume_1mthUsd: 57929168359984.54);
     final tAssetModelList = [tAssetModel];
-    final Asset tAssetTrivia = tAssetModel;
 
 
 
