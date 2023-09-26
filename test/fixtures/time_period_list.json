@@ -1,0 +1,15 @@
+[{
+    "period_id": "30MIN",
+    "length_seconds": 1800,
+    "length_months": 0,
+    "unit_count": 30,
+    "unit_name": "minute",
+    "display_name": "30 Minutes"
+  },{
+    "period_id": "30MIN",
+    "length_seconds": 1800,
+    "length_months": 0,
+    "unit_count": 30,
+    "unit_name": "minute",
+    "display_name": "30 Minutes"
+  }]

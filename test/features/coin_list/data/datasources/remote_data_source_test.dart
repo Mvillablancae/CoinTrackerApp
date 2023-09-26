@@ -68,6 +68,57 @@ void main() {
       ));
     });
 
+    test('should get a list of exchange rates from server', () {
+      //arrange
+      when(mockClient.get(any, headers: anyNamed('headers'))).thenAnswer(
+        (_) async => http.Response(fixture('exchange_rate_list.json'), 200),
+      );
+      // act
+      remoteDataSource.getListOfExchangeRatesForAssetPair('BTC',
+        'USD',
+        "1SEC",
+        DateTime.tryParse("2021-03-02T00:00:00.0000000Z")!,
+        DateTime.tryParse("2021-03-02T00:01:00.0000000Z")!,
+        100);
+      // assert
+      const coinAPIKEY = String.fromEnvironment('coinAPIKEY');
+      if (coinAPIKEY.isEmpty) {
+        throw AssertionError('coinAPIKEY is not set');
+      }
+      verify(mockClient.get(
+        Uri.parse(
+          'https://rest.coinapi.io/v1/assets/icons/32',
+        ),
+        headers: {
+          'Content-Type': 'application/json',
+          "X-CoinAPI-Key": coinAPIKEY
+        },
+      ));
+    });
+
+    test('should get a list of time periods from server', () {
+      //arrange
+      when(mockClient.get(any, headers: anyNamed('headers'))).thenAnswer(
+        (_) async => http.Response(fixture('time_period_list.json'), 200),
+      );
+      // act
+      remoteDataSource.getListOfTimePeriods();
+      // assert
+      const coinAPIKEY = String.fromEnvironment('coinAPIKEY');
+      if (coinAPIKEY.isEmpty) {
+        throw AssertionError('coinAPIKEY is not set');
+      }
+      verify(mockClient.get(
+        Uri.parse(
+          'https://rest.coinapi.io/v1/exchangerate/history/periods',
+        ),
+        headers: {
+          'Content-Type': 'application/json',
+          "X-CoinAPI-Key": coinAPIKEY
+        },
+      ));
+    });
+
     test(
       'should throw a ServerException when the response code is 404 or other',
       () async {

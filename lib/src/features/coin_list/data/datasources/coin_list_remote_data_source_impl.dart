@@ -107,7 +107,7 @@ class CoinListRemoteDataSourceImpl implements CoinListRemoteDataSource {
       throw AssertionError('coinAPIKEY is not set');
     }
     final response = await client.get(
-      Uri.parse('https://rest.coinapi.io/v1/assets/icons/32'),
+      Uri.parse('https://rest.coinapi.io/v1/exchangerate/history/periods'),
       headers: {
         'Content-Type': 'application/json',
         "X-CoinAPI-Key": coinAPIKEY
