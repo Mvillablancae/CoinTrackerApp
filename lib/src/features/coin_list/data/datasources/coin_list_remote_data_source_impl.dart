@@ -10,6 +10,8 @@ import 'package:http/http.dart' as http;
 
 import '../../../../core/errors/exceptions.dart';
 import '../models/asset_model.dart';
+import '../models/exchange_rate_model.dart';
+import '../models/time_period_model.dart';
 
 class CoinListRemoteDataSourceImpl implements CoinListRemoteDataSource {
   CoinListRemoteDataSourceImpl(this.client);
@@ -72,14 +74,53 @@ class CoinListRemoteDataSourceImpl implements CoinListRemoteDataSource {
       String periodId,
       DateTime timeStart,
       DateTime timeEnd,
-      int? limit) {
-    // TODO: implement getListOfExchangeRatesForAssetPair
-    throw UnimplementedError();
+      int? limit) async {
+    List<ExchangeRate> exchangeRateList = [];
+    const coinAPIKEY = String.fromEnvironment('coinAPIKEY');
+    if (coinAPIKEY.isEmpty) {
+      throw AssertionError('coinAPIKEY is not set');
+    }
+    final response = await client.get(
+      Uri.parse('https://rest.coinapi.io/v1/assets/icons/32'),
+      headers: {
+        'Content-Type': 'application/json',
+        "X-CoinAPI-Key": coinAPIKEY
+      },
+    );
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+      for (dynamic r in jsonResponse) {
+        exchangeRateList.add(ExchangeRateModel.fromJson(r));
+      }
+      return exchangeRateList;
+    } else {
+      throw ServerException();
+    }
+    
   }
 
   @override
-  Future<List<TimePeriod>> getListOfTimePeriods() {
-    // TODO: implement getListOfTimePeriods
-    throw UnimplementedError();
+  Future<List<TimePeriod>> getListOfTimePeriods() async {
+    List<TimePeriod> timePeriodList = [];
+    const coinAPIKEY = String.fromEnvironment('coinAPIKEY');
+    if (coinAPIKEY.isEmpty) {
+      throw AssertionError('coinAPIKEY is not set');
+    }
+    final response = await client.get(
+      Uri.parse('https://rest.coinapi.io/v1/assets/icons/32'),
+      headers: {
+        'Content-Type': 'application/json',
+        "X-CoinAPI-Key": coinAPIKEY
+      },
+    );
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+      for (dynamic r in jsonResponse) {
+        timePeriodList.add(TimePeriodModel.fromJson(r));
+      }
+      return timePeriodList;
+    } else {
+      throw ServerException();
+    }
   }
 }

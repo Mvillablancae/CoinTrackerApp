@@ -68,7 +68,6 @@ void main() {
 
     bool isEqual = false;
 
-    //print(timePeriod);
     result.fold((l) => null, (r) {
       print(r);
       print(exchangeRateList);
