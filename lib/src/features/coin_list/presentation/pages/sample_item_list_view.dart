@@ -2,19 +2,17 @@ import 'package:coin_tracker_app/src/features/coin_list/presentation/provider/co
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../core/settings/settings_view.dart';
-import 'sample_item.dart';
+import '../../../../core/settings/settings_view.dart';
 import 'sample_item_details_view.dart';
 
 class SampleItemListView extends StatelessWidget {
   const SampleItemListView({
     super.key,
-    this.items = const [SampleItem(1), SampleItem(2), SampleItem(3)],
   });
 
   static const routeName = '/';
 
-  final List<SampleItem> items;
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +37,7 @@ class SampleItemListView extends StatelessWidget {
             );
           } else {
             return ListView.builder(
-              restorationId: 'sampleItemListView',
+              restorationId: 'CoinListListView',
               itemCount: provider.listOfAssets.length,
               itemBuilder: (BuildContext context, int index) {
                 final item = provider.listOfAssets[index];
@@ -48,14 +46,21 @@ class SampleItemListView extends StatelessWidget {
                       title: Text('${item.asset.assetId}'),
                       subtitle: item.asset.priceUsd != null
                           ? Text(
-                              '${item.asset.priceUsd?.toStringAsFixed(4)} USD',
+                              item.asset.name,
                             )
                           : null,
                       leading: CircleAvatar(
                         foregroundImage: NetworkImage(item.icon.url),
                         backgroundColor: Colors.transparent,
                       ),
+                      trailing: item.asset.priceUsd != null
+                          ? Text(
+                              '${item.asset.priceUsd?.toStringAsFixed(4)} USD',
+                              style: TextStyle(color: Colors.green[700]),
+                            )
+                          : const SizedBox(),
                       onTap: () {
+                        provider.selectAssetToShowDetails(item);
                         Navigator.restorablePushNamed(
                           context,
                           SampleItemDetailsView.routeName,

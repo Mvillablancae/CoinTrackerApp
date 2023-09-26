@@ -11,6 +11,7 @@ class CoinListProvider extends ChangeNotifier {
 
   List<AssetWithIcon> listOfAssets = [];
   bool loading = false;
+  AssetWithIcon? selected;
 
   Future<void> loadListOfAssetsWithIcon() async {
     loading = true;
@@ -22,6 +23,12 @@ class CoinListProvider extends ChangeNotifier {
       }
     });
     loading = false;
+    notifyListeners();
+  }
+
+  void selectAssetToShowDetails(AssetWithIcon selectedAsset) {
+    
+    selected = selectedAsset;
     notifyListeners();
   }
 }

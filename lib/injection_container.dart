@@ -28,7 +28,7 @@ void init()  {
   sl.registerLazySingleton<CoinListRemoteDataSource>(() => CoinListRemoteDataSourceImpl(sl()));
 
   //Provider
-  sl.registerFactory<CoinListProvider>(
+  sl.registerLazySingleton<CoinListProvider>(
     () => CoinListProvider(getListOfAssetsWithIcon: sl()),
   );
 
