@@ -2,6 +2,7 @@ import 'package:coin_tracker_app/src/core/errors/exceptions.dart';
 import 'package:coin_tracker_app/src/core/errors/failure.dart';
 import 'package:coin_tracker_app/src/core/network/network_info.dart';
 import 'package:coin_tracker_app/src/features/coin_list/data/datasources/coin_list_remote_data_source.dart';
+import 'package:coin_tracker_app/src/features/coin_list/data/models/asset_icon_model.dart';
 import 'package:coin_tracker_app/src/features/coin_list/data/models/asset_model.dart';
 import 'package:coin_tracker_app/src/features/coin_list/data/repositories/coin_list_repository_impl.dart';
 import 'package:coin_tracker_app/src/features/coin_list/domain/entities/asset_entity.dart';
@@ -96,6 +97,86 @@ void main() {
         // assert
         verify(mockRemoteDataSource.getListOfAssets());
         expect(result, equals(Left(ServerFailure())));
+      },
+    );
+
+  });
+
+  group('getListOfAssetsIcons', () {
+    // DATA FOR THE MOCKS AND ASSERTIONS
+    final tAssetIconModel = AssetIconModel(
+        assetId: 'BTC',
+        url:'https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_16/f231d7382689406f9a50dde841418c64.png');
+    final tAssetIconModelList = [tAssetIconModel];
+
+
+
+    test(
+      'should return remote data when the call to remote data source is successful',
+      () async {
+        // arrange
+        when(mockRemoteDataSource.getListOfAssetsIcons())
+            .thenAnswer((_) async => tAssetIconModelList);
+        // act
+        final result = await repository.getListOfAssetsIcons();
+        // assert
+        verify(mockRemoteDataSource.getListOfAssetsIcons());
+
+        bool isEqual = false;
+
+        result.fold((l) => null, (r) {
+          isEqual = listEquals(r, tAssetIconModelList);
+        });
+
+        expect(result, isNotNull);
+        expect(isEqual, true);
+      },
+    );
+
+
+
+  });
+  group('getListOfExchangeRate', () {
+    // DATA FOR THE MOCKS AND ASSERTIONS
+    final tAssetModel = AssetModel(
+        assetId: 'BTC',
+        dataEnd: DateTime.parse("2019-11-03"),
+        dataOrderbookEnd: DateTime.parse("2019-11-03T17:55:17.8592413Z"),
+        dataOrderbookStart: DateTime.parse("2014-02-24T17:43:05.0000000Z"),
+        dataQuoteEnd: DateTime.parse("2019-11-03T17:55:07.6724523Z"),
+        dataQuoteStart: DateTime.parse("2014-02-24T17:43:05.0000000Z"),
+        dataStart: DateTime.parse("2010-07-17"),
+        dataSymbolsCount: 22711,
+        dataTradeEnd: DateTime.parse("2019-11-03T17:55:11.8220000Z"),
+        dataTradeStart: DateTime.parse("2010-07-17T23:09:17.0000000Z"),
+        name: 'Bitcoin',
+        priceUsd: 9166.207274778093436220194944,
+        typeIsCrypto: 1,
+        volume_1dayUsd: 2086392323256.16,
+        volume_1hrsUsd: 102894431436.49,
+        volume_1mthUsd: 57929168359984.54);
+    final tAssetModelList = [tAssetModel];
+
+
+    test(
+      'should return remote data when the call to remote data source is successful',
+      () async {
+        // arrange
+        when(mockRemoteDataSource.getListOfAssets())
+            .thenAnswer((_) async => tAssetModelList);
+        // act
+        final result = await repository.getListOfAssets();
+        // assert
+        verify(mockRemoteDataSource.getListOfAssets());
+
+        bool isEqual = false;
+
+        result.fold((l) => null, (r) {
+          isEqual = listEquals(r, tAssetModelList);
+        });
+
+        expect(result, isNotNull);
+        expect(isEqual, true);
       },
     );
 

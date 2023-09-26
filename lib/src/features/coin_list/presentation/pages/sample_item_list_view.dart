@@ -12,8 +12,6 @@ class SampleItemListView extends StatelessWidget {
 
   static const routeName = '/';
 
-
-
   @override
   Widget build(BuildContext context) {
     context.read<CoinListProvider>().loadListOfAssetsWithIcon();
@@ -61,6 +59,13 @@ class SampleItemListView extends StatelessWidget {
                           : const SizedBox(),
                       onTap: () {
                         provider.selectAssetToShowDetails(item);
+                        provider.loadHistoricalExchangeRate(
+                            item.asset.assetId,
+                            'USD',
+                            "1MIN",
+                            DateTime.now().subtract(const Duration(days: 1)),
+                            DateTime.now(),
+                            100);
                         Navigator.restorablePushNamed(
                           context,
                           SampleItemDetailsView.routeName,

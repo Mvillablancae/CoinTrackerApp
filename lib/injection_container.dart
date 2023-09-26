@@ -3,6 +3,7 @@ import 'package:coin_tracker_app/src/features/coin_list/data/datasources/coin_li
 import 'package:coin_tracker_app/src/features/coin_list/data/datasources/coin_list_remote_data_source_impl.dart';
 import 'package:coin_tracker_app/src/features/coin_list/data/repositories/coin_list_repository_impl.dart';
 import 'package:coin_tracker_app/src/features/coin_list/domain/repositories/coin_list_repository.dart';
+import 'package:coin_tracker_app/src/features/coin_list/domain/usecases/get_historical_exchange_rate.dart';
 import 'package:coin_tracker_app/src/features/coin_list/domain/usecases/get_list_of_assets_with_icon.dart';
 import 'package:coin_tracker_app/src/features/coin_list/presentation/provider/coin_list_provider.dart';
 import 'package:http/http.dart' as http;
@@ -19,8 +20,9 @@ void init()  {
   sl.registerLazySingleton<InternetConnectionChecker>(() => InternetConnectionChecker());
   sl.registerLazySingleton<http.Client>(() => http.Client());
 
-  //Repository
+  //UseCases
   sl.registerLazySingleton<GetListOfAssetsWithIcon>(() => GetListOfAssetsWithIcon(sl()));
+    sl.registerLazySingleton<GetHistoricalExchangeRate>(() => GetHistoricalExchangeRate(sl()));
   //Repository
   sl.registerLazySingleton<CoinListRepository>(() => CoinListRepositoryImpl(networkInfo: sl(), remoteDataSource: sl()));
 
@@ -29,7 +31,7 @@ void init()  {
 
   //Provider
   sl.registerLazySingleton<CoinListProvider>(
-    () => CoinListProvider(getListOfAssetsWithIcon: sl()),
+    () => CoinListProvider(getListOfAssetsWithIcon: sl(), getHistoricalExchangeRate: sl()),
   );
 
   

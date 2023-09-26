@@ -20,25 +20,23 @@ class CoinListRepositoryImpl implements CoinListRepository {
   @override
   Future<Either<Failure, List<Asset>>> getListOfAssets() async {
     networkInfo.isConnected;
-  try {
-    final remoteAssets =
-        await remoteDataSource.getListOfAssets();
-    return Right(remoteAssets);
-  } on ServerException {
-    return Left(ServerFailure());
-  }
+    try {
+      final remoteAssets = await remoteDataSource.getListOfAssets();
+      return Right(remoteAssets);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
   }
 
   @override
-  Future<Either<Failure, List<AssetIcon>>> getListOfAssetsIcons()async  {
+  Future<Either<Failure, List<AssetIcon>>> getListOfAssetsIcons() async {
     networkInfo.isConnected;
-  try {
-    final remoteAssetsIcons =
-        await remoteDataSource.getListOfAssetsIcons();
-    return Right(remoteAssetsIcons);
-  } on ServerException {
-    return Left(ServerFailure());
-  }
+    try {
+      final remoteAssetsIcons = await remoteDataSource.getListOfAssetsIcons();
+      return Right(remoteAssetsIcons);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
   }
 
   @override
@@ -49,14 +47,26 @@ class CoinListRepositoryImpl implements CoinListRepository {
           String periodId,
           DateTime timeStart,
           DateTime timeEnd,
-          int? limit) {
-    // TODO: implement getListOfExchangeRatesForAssetPair
-    throw UnimplementedError();
+          int? limit) async {
+    networkInfo.isConnected;
+    try {
+      final remoteAssetsIcons =
+          await remoteDataSource.getListOfExchangeRatesForAssetPair(
+              assetIdBase, assetIdQuote, periodId, timeStart, timeEnd, limit);
+      return Right(remoteAssetsIcons);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
   }
 
   @override
-  Future<Either<Failure, List<TimePeriod>>> getListOfTimePeriods() {
-    // TODO: implement getListOfTimePeriods
-    throw UnimplementedError();
+  Future<Either<Failure, List<TimePeriod>>> getListOfTimePeriods() async {
+    networkInfo.isConnected;
+    try {
+      final remoteAssetsIcons = await remoteDataSource.getListOfTimePeriods();
+      return Right(remoteAssetsIcons);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
   }
 }

@@ -9,8 +9,12 @@ import 'package:coin_tracker_app/src/core/errors/failure.dart' as _i6;
 import 'package:coin_tracker_app/src/core/usecases/usecase.dart' as _i8;
 import 'package:coin_tracker_app/src/features/coin_list/domain/entities/asset_with_icon_entity.dart'
     as _i7;
+import 'package:coin_tracker_app/src/features/coin_list/domain/entities/exchange_rate_entity.dart'
+    as _i10;
 import 'package:coin_tracker_app/src/features/coin_list/domain/repositories/coin_list_repository.dart'
     as _i2;
+import 'package:coin_tracker_app/src/features/coin_list/domain/usecases/get_historical_exchange_rate.dart'
+    as _i9;
 import 'package:coin_tracker_app/src/features/coin_list/domain/usecases/get_list_of_assets_with_icon.dart'
     as _i4;
 import 'package:dartz/dartz.dart' as _i3;
@@ -92,4 +96,50 @@ class MockGetListOfAssetsWithIcon extends _i1.Mock
           ),
         )),
       ) as _i5.Future<_i3.Either<_i6.Failure, List<_i7.AssetWithIcon>>>);
+}
+
+/// A class which mocks [GetHistoricalExchangeRate].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetHistoricalExchangeRate extends _i1.Mock
+    implements _i9.GetHistoricalExchangeRate {
+  @override
+  _i2.CoinListRepository get repository => (super.noSuchMethod(
+        Invocation.getter(#repository),
+        returnValue: _FakeCoinListRepository_0(
+          this,
+          Invocation.getter(#repository),
+        ),
+        returnValueForMissingStub: _FakeCoinListRepository_0(
+          this,
+          Invocation.getter(#repository),
+        ),
+      ) as _i2.CoinListRepository);
+  @override
+  _i5.Future<_i3.Either<_i6.Failure, List<_i10.ExchangeRate>>> call(
+          _i9.Params? params) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [params],
+        ),
+        returnValue:
+            _i5.Future<_i3.Either<_i6.Failure, List<_i10.ExchangeRate>>>.value(
+                _FakeEither_1<_i6.Failure, List<_i10.ExchangeRate>>(
+          this,
+          Invocation.method(
+            #call,
+            [params],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i5.Future<_i3.Either<_i6.Failure, List<_i10.ExchangeRate>>>.value(
+                _FakeEither_1<_i6.Failure, List<_i10.ExchangeRate>>(
+          this,
+          Invocation.method(
+            #call,
+            [params],
+          ),
+        )),
+      ) as _i5.Future<_i3.Either<_i6.Failure, List<_i10.ExchangeRate>>>);
 }

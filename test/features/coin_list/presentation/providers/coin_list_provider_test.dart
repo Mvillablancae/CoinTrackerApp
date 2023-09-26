@@ -3,6 +3,7 @@ import 'package:coin_tracker_app/src/features/coin_list/data/models/asset_icon_m
 import 'package:coin_tracker_app/src/features/coin_list/data/models/asset_model.dart';
 import 'package:coin_tracker_app/src/features/coin_list/domain/entities/asset_icon_entity.dart';
 import 'package:coin_tracker_app/src/features/coin_list/domain/entities/asset_with_icon_entity.dart';
+import 'package:coin_tracker_app/src/features/coin_list/domain/usecases/get_historical_exchange_rate.dart';
 import 'package:coin_tracker_app/src/features/coin_list/domain/usecases/get_list_of_assets_with_icon.dart';
 import 'package:coin_tracker_app/src/features/coin_list/presentation/provider/coin_list_provider.dart';
 import 'package:dartz/dartz.dart';
@@ -15,22 +16,26 @@ import 'package:mockito/mockito.dart';
 
 @GenerateNiceMocks([
   MockSpec<GetListOfAssetsWithIcon>(),
+  MockSpec<GetHistoricalExchangeRate>()
 ])
 import 'coin_list_provider_test.mocks.dart';
 
 void main() {
   late final MockGetListOfAssetsWithIcon getListOfAssetsWithIcon;
+  late final MockGetHistoricalExchangeRate getHistoricalExchangeRate;
 
   late final CoinListProvider provider;
 
   setUp(() {
     getListOfAssetsWithIcon = MockGetListOfAssetsWithIcon();
-    provider =
-        CoinListProvider(getListOfAssetsWithIcon: getListOfAssetsWithIcon);
+    getHistoricalExchangeRate = MockGetHistoricalExchangeRate();
+    provider = CoinListProvider(
+        getListOfAssetsWithIcon: getListOfAssetsWithIcon,
+        getHistoricalExchangeRate: getHistoricalExchangeRate);
   });
 
   group('provider usecases', () {
-    test('provider should get a list of assets with icon', ()  async {
+    test('provider should get a list of assets with icon', () async {
       when(getListOfAssetsWithIcon.call(NoParams())).thenAnswer((_) async {
         return Right(<AssetWithIcon>[
           AssetWithIcon(
@@ -65,7 +70,7 @@ void main() {
       await provider.loadListOfAssetsWithIcon();
 
       print(provider.listOfAssets);
-      
+
       bool verifyEqualLists = listEquals(provider.listOfAssets, [
         AssetWithIcon(
             asset: AssetModel(

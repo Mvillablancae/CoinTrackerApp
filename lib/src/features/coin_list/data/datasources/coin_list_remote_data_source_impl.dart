@@ -81,12 +81,17 @@ class CoinListRemoteDataSourceImpl implements CoinListRemoteDataSource {
       throw AssertionError('coinAPIKEY is not set');
     }
     final response = await client.get(
-      Uri.parse('https://rest.coinapi.io/v1/assets/icons/32'),
+      Uri.parse(limit != null
+          ? 'https://rest.coinapi.io/v1/exchangerate/$assetIdBase/$assetIdQuote/history?period_id=$periodId&time_start=${timeStart.toIso8601String().substring(0,19)}&time_end=${timeEnd.toIso8601String().substring(0,19)}&limit=$limit':
+
+          'https://rest.coinapi.io/v1/exchangerate/$assetIdBase/$assetIdQuote/history?period_id=$periodId&time_start=${timeStart.toIso8601String().substring(0,19)}&time_end=${timeEnd.toIso8601String().substring(0,19)}'),
       headers: {
         'Content-Type': 'application/json',
         "X-CoinAPI-Key": coinAPIKEY
       },
     );
+    print(
+        'https://rest.coinapi.io/v1/exchangerate/$assetIdBase/$assetIdQuote/history?period_id=$periodId&time_start=${timeStart.toIso8601String()}&time_end=${timeEnd.toIso8601String()}&limit=$limit');
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
       for (dynamic r in jsonResponse) {
@@ -96,7 +101,6 @@ class CoinListRemoteDataSourceImpl implements CoinListRemoteDataSource {
     } else {
       throw ServerException();
     }
-    
   }
 
   @override
