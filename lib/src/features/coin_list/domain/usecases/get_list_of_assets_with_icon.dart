@@ -18,12 +18,13 @@ class GetListOfAssetsWithIcon extends UseCase<List<AssetWithIcon>, NoParams> {
         await repository.getListOfAssetsIcons();
     List<AssetWithIcon> assetsWithIcons = [];
 
-    assets.fold((l) {
-      return const Right(<AssetWithIcon>[]); //Replace with Failure
+    
+    return assets.fold((l) {
+      return Left(ServerFailure()); //Replace with Failure
     }, (assetList) {
       for (Asset asset in assetList) {
         assetsIcons.fold((l) {
-          return const Right(<AssetWithIcon>[]); //Replace with Failure
+          return const Left(ServerFailure); //Replace with Failure
         }, (assetIconList) {
           for (AssetIcon assetIcon in assetIconList) {
             if (asset.assetId == assetIcon.assetId) {
@@ -32,8 +33,7 @@ class GetListOfAssetsWithIcon extends UseCase<List<AssetWithIcon>, NoParams> {
           }
         });
       }
-      
+      return Right(assetsWithIcons);
     });
-    return Right(assetsWithIcons);
   }
 }

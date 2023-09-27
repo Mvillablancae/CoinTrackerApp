@@ -1,5 +1,7 @@
+import 'package:coin_tracker_app/src/core/navigation/go_router_navigator.dart';
 import 'package:coin_tracker_app/src/features/coin_list/presentation/provider/coin_list_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'features/coin_list/presentation/pages/sample_item_details_view.dart';
 import 'features/coin_list/presentation/pages/sample_item_list_view.dart';
@@ -16,52 +18,21 @@ class CoinTrackerApp extends StatelessWidget {
 
   final SettingsController settingsController;
 
+  final GoRouterWithProviders router =
+      GoRouterWithProviders(coinListProvider: sl<CoinListProvider>());
+
   @override
   Widget build(BuildContext context) {
+    router.init();
     return AnimatedBuilder(
       animation: settingsController,
       builder: (BuildContext context, Widget? child) {
-        return MaterialApp(
+        return MaterialApp.router(
           restorationScopeId: 'app',
           theme: ThemeData(),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
-          onGenerateRoute: (RouteSettings routeSettings) {
-            return MaterialPageRoute<void>(
-              settings: routeSettings,
-              builder: (BuildContext context) {
-                switch (routeSettings.name) {
-                  case SettingsView.routeName:
-                    return ChangeNotifierProvider.value(
-                      value: sl<CoinListProvider>(),
-                      builder: ((context, child) =>
-                          child!), // Replace with your actual ChangeNotifier.
-                      child: SettingsView(
-                          controller:
-                              settingsController), // Replace with your actual widget that uses the provider.
-                    );
-                  case SampleItemDetailsView.routeName:
-                    return ChangeNotifierProvider.value(
-                      value: sl<
-                          CoinListProvider>(), // Replace with your actual ChangeNotifier.
-                      builder: ((context, child) => child!),
-                      child:
-                          const SampleItemDetailsView(), // Replace with your actual widget that uses the provider.
-                    );
-
-                  case SampleItemListView.routeName:
-                  default:
-                    return ChangeNotifierProvider.value(
-                      value: sl<
-                          CoinListProvider>(), // Replace with your actual ChangeNotifier.
-                      builder: ((context, child) => child!),
-                      child:
-                          const SampleItemListView(), // Replace with your actual widget that uses the provider.
-                    );
-                }
-              },
-            );
-          },
+          routerConfig: router.router,
         );
       },
     );

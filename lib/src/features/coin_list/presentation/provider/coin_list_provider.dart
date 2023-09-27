@@ -18,12 +18,16 @@ class CoinListProvider extends ChangeNotifier {
   List<ExchangeRate> historicExchangeRate = [];
   bool loading = false;
   AssetWithIcon? selected;
+  String? error;
 
   Future<void> loadListOfAssetsWithIcon() async {
+    error = null;
     loading = true;
     notifyListeners();
     final listOfAssetsWithIcon = await getListOfAssetsWithIcon.call(NoParams());
-    listOfAssetsWithIcon.fold((l) => null, (r) {
+    listOfAssetsWithIcon.fold((l) {
+      error = "Error al cargar monedas.";
+    }, (r) {
       for (AssetWithIcon assetWithIcon in r) {
         listOfAssets.add(assetWithIcon);
       }
@@ -34,6 +38,7 @@ class CoinListProvider extends ChangeNotifier {
 
   void selectAssetToShowDetails(AssetWithIcon selectedAsset) {
     selected = selectedAsset;
+    loading = true;
     notifyListeners();
   }
 
@@ -44,6 +49,7 @@ class CoinListProvider extends ChangeNotifier {
       DateTime timeStart,
       DateTime timeEnd,
       int? limit) async {
+    error = null;
     loading = true;
     notifyListeners();
     final exchangeRateHistoricalData = await getHistoricalExchangeRate(Params(
@@ -54,7 +60,7 @@ class CoinListProvider extends ChangeNotifier {
         timeEnd: timeEnd,
         limit: limit));
 
-    exchangeRateHistoricalData.fold((l) => null, (r){
+    exchangeRateHistoricalData.fold((l) => null, (r) {
       historicExchangeRate = List.from(r);
     });
 

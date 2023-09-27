@@ -1,12 +1,13 @@
 import 'package:coin_tracker_app/src/features/coin_list/presentation/provider/coin_list_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/settings/settings_view.dart';
 import 'sample_item_details_view.dart';
 
-class SampleItemListView extends StatelessWidget {
-  const SampleItemListView({
+class CoinListView extends StatelessWidget {
+  const CoinListView({
     super.key,
   });
 
@@ -14,21 +15,37 @@ class SampleItemListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<CoinListProvider>().loadListOfAssetsWithIcon();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cripto List'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {
-              Navigator.restorablePushNamed(context, SettingsView.routeName);
-            },
-          ),
-        ],
       ),
       body: Consumer<CoinListProvider>(
-        builder: (context, provider, child) {
+        builder: (contextBuilder, provider, child) {
+          if (provider.error != null) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "Ha ocurrido un error",
+                        style: TextStyle(
+                            fontSize: 42, fontWeight: FontWeight.bold),
+                      ),
+                      Text(provider.error!)
+                    ],
+                  ),
+                  TextButton(
+                      onPressed: () async {
+                        provider.loadListOfAssetsWithIcon();
+                      },
+                      child: Text("Recargar información"))
+                ],
+              ),
+            );
+          }
           if (provider.loading) {
             return Center(
               child: CircularProgressIndicator(),
@@ -59,17 +76,7 @@ class SampleItemListView extends StatelessWidget {
                           : const SizedBox(),
                       onTap: () {
                         provider.selectAssetToShowDetails(item);
-                        provider.loadHistoricalExchangeRate(
-                            item.asset.assetId,
-                            'USD',
-                            "1MIN",
-                            DateTime.now().subtract(const Duration(days: 1)),
-                            DateTime.now(),
-                            100);
-                        Navigator.restorablePushNamed(
-                          context,
-                          SampleItemDetailsView.routeName,
-                        );
+                        GoRouter.of(context).push(CoinDetailsView.routeName);
                       });
                 } else {
                   return const SizedBox();
