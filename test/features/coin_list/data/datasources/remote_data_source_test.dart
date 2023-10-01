@@ -74,12 +74,13 @@ void main() {
         (_) async => http.Response(fixture('exchange_rate_list.json'), 200),
       );
       // act
-      remoteDataSource.getListOfExchangeRatesForAssetPair('BTC',
-        'USD',
-        "1SEC",
-        DateTime.tryParse("2021-03-02T00:00:00.0000000Z")!,
-        DateTime.tryParse("2021-03-02T00:01:00.0000000Z")!,
-        100);
+      remoteDataSource.getListOfExchangeRatesForAssetPair(
+          'BTC',
+          'USD',
+          "1SEC",
+          DateTime.tryParse("2021-03-02T00:00:00")!,
+          DateTime.tryParse("2021-03-02T00:01:00")!,
+          100);
       // assert
       const coinAPIKEY = String.fromEnvironment('coinAPIKEY');
       if (coinAPIKEY.isEmpty) {
@@ -87,7 +88,7 @@ void main() {
       }
       verify(mockClient.get(
         Uri.parse(
-          'https://rest.coinapi.io/v1/assets/icons/32',
+          'https://rest.coinapi.io/v1/exchangerate/BTC/USD/history?period_id=1SEC&time_start=2021-03-02T00:00:00&time_end=2021-03-02T00:01:00&limit=100',
         ),
         headers: {
           'Content-Type': 'application/json',
