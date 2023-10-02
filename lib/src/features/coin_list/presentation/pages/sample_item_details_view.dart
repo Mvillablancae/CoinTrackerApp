@@ -19,34 +19,50 @@ class CoinDetailsView extends StatelessWidget {
         ),
         body: Consumer<CoinListProvider>(
           builder: (context, provider, child) => Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                height: MediaQuery.sizeOf(context).height * 0.3,
+                height: MediaQuery.sizeOf(context).height * 0.15,
                 width: MediaQuery.sizeOf(context).width,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      height: 100,
-                      width: 100,
+                      height: MediaQuery.sizeOf(context).height * 0.12,
+                      width: MediaQuery.sizeOf(context).height * 0.12,
                       decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(provider.selected!.icon.url,
-                                  scale: 0.5))),
+                        image: DecorationImage(
+                          image: NetworkImage(provider.selected!.icon.url,
+                              scale: 0.5),
+                        ),
+                      ),
                     ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          provider.selected!.asset.assetId,
+                          style: const TextStyle(
+                              fontSize: 40, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          provider.selected!.asset.name,
+                          style: const TextStyle(fontSize: 24),
+                        ),
+                      ],
+                    ),
+                    Expanded(child: Container()),
                     Text(
-                      provider.selected!.asset.assetId,
-                      style:
-                          TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                      "\$${provider.selected!.asset.priceUsd.toString().substring(0, provider.selected!.asset.priceUsd.toString().indexOf(".") + 3)} USD",
+                      style: const TextStyle(fontSize: 20, color: Colors.green),
                     ),
-                    Text(provider.selected!.asset.name),
-                    Text(provider.selected!.asset.priceUsd.toString()),
                   ],
                 ),
               ),
               SizedBox(
-                height: MediaQuery.sizeOf(context).height * 0.6,
+                height: MediaQuery.sizeOf(context).height * 0.5,
                 width: MediaQuery.sizeOf(context).width,
                 child: Candlesticks(
                   //key: Key(currentSymbol + currentInterval),
@@ -58,7 +74,7 @@ class CoinDetailsView extends StatelessWidget {
                           low: e.rateLow,
                           open: e.rateOpen,
                           close: e.rateClose,
-                          volume: 1000))
+                          volume: 100))
                       .toList(),
                   //onLoadMoreCandles: loadMoreCandles,
                   // onRemoveIndicator: (String indicator) {
