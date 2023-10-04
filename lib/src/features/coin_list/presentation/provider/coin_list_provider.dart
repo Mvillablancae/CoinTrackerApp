@@ -8,8 +8,7 @@ import 'package:flutter/foundation.dart';
 
 class CoinListProvider extends ChangeNotifier {
   CoinListProvider(
-      {required this.getListOfAssetsWithIcon,
-      required this.getHistoricalExchangeRate});
+      {required this.getListOfAssetsWithIcon, required this.getHistoricalExchangeRate});
 
   final GetListOfAssetsWithIcon getListOfAssetsWithIcon;
   final GetHistoricalExchangeRate getHistoricalExchangeRate;
@@ -42,13 +41,8 @@ class CoinListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> loadHistoricalExchangeRate(
-      String assetIdBase,
-      String assetIdQuote,
-      String periodId,
-      DateTime timeStart,
-      DateTime timeEnd,
-      int? limit) async {
+  Future<void> loadHistoricalExchangeRate(String assetIdBase, String assetIdQuote, String periodId,
+      DateTime timeStart, DateTime timeEnd, int? limit) async {
     error = null;
     loading = true;
     notifyListeners();
@@ -60,7 +54,9 @@ class CoinListProvider extends ChangeNotifier {
         timeEnd: timeEnd,
         limit: limit));
 
-    exchangeRateHistoricalData.fold((l) => null, (r) {
+    exchangeRateHistoricalData.fold((l) {
+      error = 'Error loading exchange data.';
+    }, (r) {
       historicExchangeRate = List.from(r);
     });
 

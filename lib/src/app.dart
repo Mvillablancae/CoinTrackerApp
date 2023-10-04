@@ -19,11 +19,10 @@ class CoinTrackerApp extends StatelessWidget {
   final SettingsController settingsController;
 
   final GoRouterWithProviders router =
-      GoRouterWithProviders(coinListProvider: sl<CoinListProvider>());
+      GoRouterWithProviders(coinListProvider: sl<CoinListProvider>())..init();
 
   @override
   Widget build(BuildContext context) {
-    router.init();
     return AnimatedBuilder(
       animation: settingsController,
       builder: (BuildContext context, Widget? child) {

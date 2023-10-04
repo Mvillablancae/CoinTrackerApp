@@ -49,7 +49,7 @@ class CoinDetailsView extends StatelessWidget {
                         ),
                         Text(
                           provider.selected!.asset.name,
-                          style: const TextStyle(fontSize: 24),
+                          style: const TextStyle(fontSize: 14),
                         ),
                       ],
                     ),
@@ -62,7 +62,8 @@ class CoinDetailsView extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: MediaQuery.sizeOf(context).height * 0.5,
+                height: MediaQuery.sizeOf(context).height * 0.7 -
+                    AppBar().preferredSize.height,
                 width: MediaQuery.sizeOf(context).width,
                 child: Candlesticks(
                   //key: Key(currentSymbol + currentInterval),
@@ -76,6 +77,11 @@ class CoinDetailsView extends StatelessWidget {
                           close: e.rateClose,
                           volume: 100))
                       .toList(),
+                  actions: [
+                    ToolBarAction(child: Text("1MIN"), onPressed: () {}),
+                    ToolBarAction(child: Text("30MIN"), onPressed: () {}),
+                    ToolBarAction(child: Text("1HR"), onPressed: () {})
+                  ],
                   //onLoadMoreCandles: loadMoreCandles,
                   // onRemoveIndicator: (String indicator) {
                   //   setState(() {
