@@ -44,6 +44,7 @@ class MockCoinListRemoteDataSource extends _i1.Mock
         returnValueForMissingStub:
             _i3.Future<List<_i4.Asset>>.value(<_i4.Asset>[]),
       ) as _i3.Future<List<_i4.Asset>>);
+
   @override
   _i3.Future<List<_i5.AssetIcon>> getListOfAssetsIcons() => (super.noSuchMethod(
         Invocation.method(
@@ -54,6 +55,7 @@ class MockCoinListRemoteDataSource extends _i1.Mock
         returnValueForMissingStub:
             _i3.Future<List<_i5.AssetIcon>>.value(<_i5.AssetIcon>[]),
       ) as _i3.Future<List<_i5.AssetIcon>>);
+
   @override
   _i3.Future<List<_i6.ExchangeRate>> getListOfExchangeRatesForAssetPair(
     String? assetIdBase,
@@ -80,6 +82,7 @@ class MockCoinListRemoteDataSource extends _i1.Mock
         returnValueForMissingStub:
             _i3.Future<List<_i6.ExchangeRate>>.value(<_i6.ExchangeRate>[]),
       ) as _i3.Future<List<_i6.ExchangeRate>>);
+
   @override
   _i3.Future<List<_i7.TimePeriod>> getListOfTimePeriods() =>
       (super.noSuchMethod(

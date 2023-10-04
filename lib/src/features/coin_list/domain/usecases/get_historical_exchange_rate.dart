@@ -16,8 +16,6 @@ class GetHistoricalExchangeRate extends UseCase<List<ExchangeRate>, Params> {
 
   @override
   Future<Either<Failure, List<ExchangeRate>>> call(Params params) async {
-    Either<Failure, List<TimePeriod>> periods =
-        await repository.getListOfTimePeriods();
     Either<Failure, List<ExchangeRate>> exchangeRates =
         await repository.getListOfExchangeRatesForAssetPair(
             params.assetIdBase,

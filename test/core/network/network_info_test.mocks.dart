@@ -58,6 +58,7 @@ class MockInternetConnectionChecker extends _i1.Mock
           Invocation.getter(#checkInterval),
         ),
       ) as Duration);
+
   @override
   Duration get checkTimeout => (super.noSuchMethod(
         Invocation.getter(#checkTimeout),
@@ -70,12 +71,14 @@ class MockInternetConnectionChecker extends _i1.Mock
           Invocation.getter(#checkTimeout),
         ),
       ) as Duration);
+
   @override
   List<_i2.AddressCheckOptions> get addresses => (super.noSuchMethod(
         Invocation.getter(#addresses),
         returnValue: <_i2.AddressCheckOptions>[],
         returnValueForMissingStub: <_i2.AddressCheckOptions>[],
       ) as List<_i2.AddressCheckOptions>);
+
   @override
   set addresses(List<_i2.AddressCheckOptions>? value) => super.noSuchMethod(
         Invocation.setter(
@@ -84,12 +87,14 @@ class MockInternetConnectionChecker extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   _i3.Future<bool> get hasConnection => (super.noSuchMethod(
         Invocation.getter(#hasConnection),
         returnValue: _i3.Future<bool>.value(false),
         returnValueForMissingStub: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
+
   @override
   _i3.Future<_i2.InternetConnectionStatus> get connectionStatus =>
       (super.noSuchMethod(
@@ -100,6 +105,7 @@ class MockInternetConnectionChecker extends _i1.Mock
             _i3.Future<_i2.InternetConnectionStatus>.value(
                 _i2.InternetConnectionStatus.connected),
       ) as _i3.Future<_i2.InternetConnectionStatus>);
+
   @override
   _i3.Stream<_i2.InternetConnectionStatus> get onStatusChange =>
       (super.noSuchMethod(
@@ -108,18 +114,21 @@ class MockInternetConnectionChecker extends _i1.Mock
         returnValueForMissingStub:
             _i3.Stream<_i2.InternetConnectionStatus>.empty(),
       ) as _i3.Stream<_i2.InternetConnectionStatus>);
+
   @override
   bool get hasListeners => (super.noSuchMethod(
         Invocation.getter(#hasListeners),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   bool get isActivelyChecking => (super.noSuchMethod(
         Invocation.getter(#isActivelyChecking),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   _i3.Future<_i2.AddressCheckResult> isHostReachable(
           _i2.AddressCheckOptions? options) =>

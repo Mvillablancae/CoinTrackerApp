@@ -75,6 +75,7 @@ class MockClient extends _i1.Mock implements _i2.Client {
           ),
         )),
       ) as _i3.Future<_i2.Response>);
+
   @override
   _i3.Future<_i2.Response> get(
     Uri? url, {
@@ -104,6 +105,7 @@ class MockClient extends _i1.Mock implements _i2.Client {
           ),
         )),
       ) as _i3.Future<_i2.Response>);
+
   @override
   _i3.Future<_i2.Response> post(
     Uri? url, {
@@ -147,6 +149,7 @@ class MockClient extends _i1.Mock implements _i2.Client {
           ),
         )),
       ) as _i3.Future<_i2.Response>);
+
   @override
   _i3.Future<_i2.Response> put(
     Uri? url, {
@@ -190,6 +193,7 @@ class MockClient extends _i1.Mock implements _i2.Client {
           ),
         )),
       ) as _i3.Future<_i2.Response>);
+
   @override
   _i3.Future<_i2.Response> patch(
     Uri? url, {
@@ -233,6 +237,7 @@ class MockClient extends _i1.Mock implements _i2.Client {
           ),
         )),
       ) as _i3.Future<_i2.Response>);
+
   @override
   _i3.Future<_i2.Response> delete(
     Uri? url, {
@@ -276,6 +281,7 @@ class MockClient extends _i1.Mock implements _i2.Client {
           ),
         )),
       ) as _i3.Future<_i2.Response>);
+
   @override
   _i3.Future<String> read(
     Uri? url, {
@@ -290,6 +296,7 @@ class MockClient extends _i1.Mock implements _i2.Client {
         returnValue: _i3.Future<String>.value(''),
         returnValueForMissingStub: _i3.Future<String>.value(''),
       ) as _i3.Future<String>);
+
   @override
   _i3.Future<_i5.Uint8List> readBytes(
     Uri? url, {
@@ -305,6 +312,7 @@ class MockClient extends _i1.Mock implements _i2.Client {
         returnValueForMissingStub:
             _i3.Future<_i5.Uint8List>.value(_i5.Uint8List(0)),
       ) as _i3.Future<_i5.Uint8List>);
+
   @override
   _i3.Future<_i2.StreamedResponse> send(_i2.BaseRequest? request) =>
       (super.noSuchMethod(
@@ -329,6 +337,7 @@ class MockClient extends _i1.Mock implements _i2.Client {
           ),
         )),
       ) as _i3.Future<_i2.StreamedResponse>);
+
   @override
   void close() => super.noSuchMethod(
         Invocation.method(

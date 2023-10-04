@@ -77,7 +77,6 @@ void main() {
     expect(result, isNotNull);
     expect(isEqual, true);
 
-    verify(mockCoinListRepository.getListOfTimePeriods());
     verify(mockCoinListRepository.getListOfExchangeRatesForAssetPair(
         'BTC',
         'USD',

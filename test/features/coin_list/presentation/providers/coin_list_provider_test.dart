@@ -127,5 +127,36 @@ void main() {
       );
       expect(verifyEqualLists, true);
     });
+
+    test('provider should get a list of TimePeriods from asset', () async {
+      when(getHistoricalExchangeRate.call(Params(
+              assetIdBase: 'BTC',
+              assetIdQuote: 'USD',
+              periodId: "30MIN",
+              timeStart: DateTime.parse('2021-03-01T00:00:00'),
+              timeEnd: DateTime.parse('2021-03-02T00:00:00'),
+              limit: 2)))
+          .thenAnswer((_) async {
+        final Map<String, dynamic> jsonMap = json.decode(fixture('exchange_rate.json'));
+        return Right(<ExchangeRate>[
+          ExchangeRateModel.fromJson(jsonMap),
+          ExchangeRateModel.fromJson(jsonMap),
+        ]);
+      });
+
+      await provider.loadHistoricalExchangeRate('BTC', 'USD', "30MIN",
+          DateTime.parse('2021-03-01T00:00:00'), DateTime.parse('2021-03-02T00:00:00'), 2);
+
+      print(provider.historicExchangeRate);
+
+      final Map<String, dynamic> jsonMap = json.decode(fixture('exchange_rate.json'));
+      bool verifyEqualLists = listEquals(provider.historicExchangeRate,
+        [
+          ExchangeRateModel.fromJson(jsonMap),
+          ExchangeRateModel.fromJson(jsonMap),
+        ]
+      );
+      expect(verifyEqualLists, true);
+    });
   });
 }

@@ -69,6 +69,7 @@ class MockGetListOfAssetsWithIcon extends _i1.Mock
           Invocation.getter(#repository),
         ),
       ) as _i2.CoinListRepository);
+
   @override
   _i5.Future<_i3.Either<_i6.Failure, List<_i7.AssetWithIcon>>> call(
           _i8.NoParams? noParams) =>
@@ -115,6 +116,7 @@ class MockGetHistoricalExchangeRate extends _i1.Mock
           Invocation.getter(#repository),
         ),
       ) as _i2.CoinListRepository);
+
   @override
   _i5.Future<_i3.Either<_i6.Failure, List<_i10.ExchangeRate>>> call(
           _i9.Params? params) =>
