@@ -11,12 +11,16 @@ import 'package:coin_tracker_app/src/features/coin_list/domain/entities/asset_wi
     as _i7;
 import 'package:coin_tracker_app/src/features/coin_list/domain/entities/exchange_rate_entity.dart'
     as _i10;
+import 'package:coin_tracker_app/src/features/coin_list/domain/entities/time_period_entity.dart'
+    as _i12;
 import 'package:coin_tracker_app/src/features/coin_list/domain/repositories/coin_list_repository.dart'
     as _i2;
 import 'package:coin_tracker_app/src/features/coin_list/domain/usecases/get_historical_exchange_rate.dart'
     as _i9;
 import 'package:coin_tracker_app/src/features/coin_list/domain/usecases/get_list_of_assets_with_icon.dart'
     as _i4;
+import 'package:coin_tracker_app/src/features/coin_list/domain/usecases/get_list_of_time_periods.dart'
+    as _i11;
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -144,4 +148,51 @@ class MockGetHistoricalExchangeRate extends _i1.Mock
           ),
         )),
       ) as _i5.Future<_i3.Either<_i6.Failure, List<_i10.ExchangeRate>>>);
+}
+
+/// A class which mocks [GetListOfTimePeriods].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetListOfTimePeriods extends _i1.Mock
+    implements _i11.GetListOfTimePeriods {
+  @override
+  _i2.CoinListRepository get repository => (super.noSuchMethod(
+        Invocation.getter(#repository),
+        returnValue: _FakeCoinListRepository_0(
+          this,
+          Invocation.getter(#repository),
+        ),
+        returnValueForMissingStub: _FakeCoinListRepository_0(
+          this,
+          Invocation.getter(#repository),
+        ),
+      ) as _i2.CoinListRepository);
+
+  @override
+  _i5.Future<_i3.Either<_i6.Failure, List<_i12.TimePeriod>>> call(
+          _i8.NoParams? params) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [params],
+        ),
+        returnValue:
+            _i5.Future<_i3.Either<_i6.Failure, List<_i12.TimePeriod>>>.value(
+                _FakeEither_1<_i6.Failure, List<_i12.TimePeriod>>(
+          this,
+          Invocation.method(
+            #call,
+            [params],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i5.Future<_i3.Either<_i6.Failure, List<_i12.TimePeriod>>>.value(
+                _FakeEither_1<_i6.Failure, List<_i12.TimePeriod>>(
+          this,
+          Invocation.method(
+            #call,
+            [params],
+          ),
+        )),
+      ) as _i5.Future<_i3.Either<_i6.Failure, List<_i12.TimePeriod>>>);
 }

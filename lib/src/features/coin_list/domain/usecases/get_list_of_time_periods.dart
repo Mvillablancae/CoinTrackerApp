@@ -21,7 +21,7 @@ class GetListOfTimePeriods extends UseCase<List<TimePeriod>, NoParams> {
     List<TimePeriod> timePeriodList = [];
 
     timePeriods.fold((l) {
-      return const Right(<ExchangeRate>[]); //Replace with Failure
+      return const Left(<ServerFailure>[]); //Replace with Failure
     }, (timePeriod) {
       timePeriodList = List.from(timePeriod);
     });

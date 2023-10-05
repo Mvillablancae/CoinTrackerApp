@@ -5,6 +5,7 @@ import 'package:coin_tracker_app/src/features/coin_list/data/repositories/coin_l
 import 'package:coin_tracker_app/src/features/coin_list/domain/repositories/coin_list_repository.dart';
 import 'package:coin_tracker_app/src/features/coin_list/domain/usecases/get_historical_exchange_rate.dart';
 import 'package:coin_tracker_app/src/features/coin_list/domain/usecases/get_list_of_assets_with_icon.dart';
+import 'package:coin_tracker_app/src/features/coin_list/domain/usecases/get_list_of_time_periods.dart';
 import 'package:coin_tracker_app/src/features/coin_list/presentation/provider/coin_list_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
@@ -22,7 +23,9 @@ void init()  {
 
   //UseCases
   sl.registerLazySingleton<GetListOfAssetsWithIcon>(() => GetListOfAssetsWithIcon(sl()));
-    sl.registerLazySingleton<GetHistoricalExchangeRate>(() => GetHistoricalExchangeRate(sl()));
+  sl.registerLazySingleton<GetHistoricalExchangeRate>(() => GetHistoricalExchangeRate(sl()));
+  sl.registerLazySingleton<GetListOfTimePeriods>(() => GetListOfTimePeriods(sl()));
+  
   //Repository
   sl.registerLazySingleton<CoinListRepository>(() => CoinListRepositoryImpl(networkInfo: sl(), remoteDataSource: sl()));
 
@@ -31,7 +34,7 @@ void init()  {
 
   //Provider
   sl.registerLazySingleton<CoinListProvider>(
-    () => CoinListProvider(getListOfAssetsWithIcon: sl(), getHistoricalExchangeRate: sl()),
+    () => CoinListProvider(getListOfAssetsWithIcon: sl(), getHistoricalExchangeRate: sl(), getListOfTimePeriods: sl()),
   );
 
   
