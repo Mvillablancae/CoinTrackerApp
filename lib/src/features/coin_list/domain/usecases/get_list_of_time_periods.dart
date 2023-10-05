@@ -16,8 +16,7 @@ class GetListOfTimePeriods extends UseCase<List<TimePeriod>, NoParams> {
 
   @override
   Future<Either<Failure, List<TimePeriod>>> call(NoParams params) async {
-    Either<Failure, List<TimePeriod>> timePeriods =
-        await repository.getListOfTimePeriods();
+    Either<Failure, List<TimePeriod>> timePeriods = await repository.getListOfTimePeriods();
     List<TimePeriod> timePeriodList = [];
 
     timePeriods.fold((l) {
@@ -25,6 +24,11 @@ class GetListOfTimePeriods extends UseCase<List<TimePeriod>, NoParams> {
     }, (timePeriod) {
       timePeriodList = List.from(timePeriod);
     });
-    return Right(timePeriodList);
+
+    return Right(timePeriodList
+        .where(
+          (element) => element.unitCount == 1,
+        )
+        .toList());
   }
 }

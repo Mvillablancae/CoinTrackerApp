@@ -33,8 +33,7 @@ class CoinDetailsView extends StatelessWidget {
                       width: MediaQuery.sizeOf(context).height * 0.12,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: NetworkImage(provider.selected!.icon.url,
-                              scale: 0.5),
+                          image: NetworkImage(provider.selected!.icon.url, scale: 0.5),
                         ),
                       ),
                     ),
@@ -44,8 +43,7 @@ class CoinDetailsView extends StatelessWidget {
                       children: [
                         Text(
                           provider.selected!.asset.assetId,
-                          style: const TextStyle(
-                              fontSize: 40, fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                         ),
                         Text(
                           provider.selected!.asset.name,
@@ -62,8 +60,7 @@ class CoinDetailsView extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: MediaQuery.sizeOf(context).height * 0.7 -
-                    AppBar().preferredSize.height,
+                height: MediaQuery.sizeOf(context).height * 0.7 - AppBar().preferredSize.height,
                 width: MediaQuery.sizeOf(context).width,
                 child: Candlesticks(
                   //key: Key(currentSymbol + currentInterval),
@@ -78,11 +75,20 @@ class CoinDetailsView extends StatelessWidget {
                           volume: 100))
                       .toList(),
                   actions: [
-                    ToolBarAction(child: Text("1MIN"), onPressed: () {}),
-                    ToolBarAction(child: Text("30MIN"), onPressed: () {}),
-                    ToolBarAction(child: Text("1HR"), onPressed: () {})
+                    ...provider.timePeriods.map((timePeriod) => ToolBarAction(
+                          child: Text(timePeriod.periodId),
+                          onPressed: () {
+                            provider.loadHistoricalExchangeRate(
+                                provider.selected!.asset.assetId,
+                                'USD',
+                                timePeriod.periodId,
+                                DateTime.now().subtract(const Duration(days: 1)),
+                                DateTime.now(),
+                                provider.limit);
+                          },
+                        )),
                   ],
-                  //onLoadMoreCandles: loadMoreCandles,
+                  // onLoadMoreCandles: loadMoreCandles,
                   // onRemoveIndicator: (String indicator) {
                   //   setState(() {
                   //     indicators = [...indicators];

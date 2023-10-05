@@ -23,6 +23,7 @@ class CoinListProvider extends ChangeNotifier {
   List<ExchangeRate> historicExchangeRate = [];
   bool loading = false;
   AssetWithIcon? selected;
+  int limit = 100;
   String? error;
 
   Future<void> loadListOfAssetsWithIcon() async {
@@ -69,7 +70,6 @@ class CoinListProvider extends ChangeNotifier {
     loading = false;
     notifyListeners();
   }
-
 
   Future<void> loadTimePeriodList() async {
     error = null;

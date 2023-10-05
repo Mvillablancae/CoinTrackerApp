@@ -28,7 +28,7 @@ class GoRouterWithProviders {
           name: CoinDetailsView.routeName.replaceFirst('/', ''),
           path: CoinDetailsView.routeName,
           builder: (context, state) => ChangeNotifierProvider.value(
-            value: coinListProvider
+            value: coinListProvider..loadTimePeriodList()
               ..loadHistoricalExchangeRate(
                   coinListProvider.selected!.asset.assetId,
                   'USD',
