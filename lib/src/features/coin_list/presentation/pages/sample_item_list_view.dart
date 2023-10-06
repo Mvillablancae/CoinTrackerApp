@@ -31,8 +31,7 @@ class CoinListView extends StatelessWidget {
                     children: [
                       Text(
                         "Ha ocurrido un error",
-                        style: TextStyle(
-                            fontSize: 42, fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 42, fontWeight: FontWeight.bold),
                       ),
                       Text(provider.error!)
                     ],
@@ -56,31 +55,28 @@ class CoinListView extends StatelessWidget {
               itemCount: provider.listOfAssets.length,
               itemBuilder: (BuildContext context, int index) {
                 final item = provider.listOfAssets[index];
-                if (item.asset.typeIsCrypto == 1) {
-                  return ListTile(
-                      title: Text('${item.asset.assetId}'),
-                      subtitle: item.asset.priceUsd != null
-                          ? Text(
-                              item.asset.name,
-                            )
-                          : null,
-                      leading: CircleAvatar(
-                        foregroundImage: NetworkImage(item.icon.url),
-                        backgroundColor: Colors.transparent,
-                      ),
-                      trailing: item.asset.priceUsd != null
-                          ? Text(
-                              '${item.asset.priceUsd?.toStringAsFixed(4)} USD',
-                              style: TextStyle(color: Colors.green[700]),
-                            )
-                          : const SizedBox(),
-                      onTap: () {
-                        provider.selectAssetToShowDetails(item);
-                        GoRouter.of(context).push(CoinDetailsView.routeName);
-                      });
-                } else {
-                  return const SizedBox();
-                }
+
+                return ListTile(
+                    title: Text('${item.asset.assetId}'),
+                    subtitle: item.asset.priceUsd != null
+                        ? Text(
+                            item.asset.name,
+                          )
+                        : null,
+                    leading: CircleAvatar(
+                      foregroundImage: NetworkImage(item.icon.url),
+                      backgroundColor: Colors.transparent,
+                    ),
+                    trailing: item.asset.priceUsd != null
+                        ? Text(
+                            '${item.asset.priceUsd?.toStringAsFixed(4)} USD',
+                            style: TextStyle(color: Colors.green[700]),
+                          )
+                        : const SizedBox(),
+                    onTap: () {
+                      provider.selectAssetToShowDetails(item);
+                      GoRouter.of(context).push(CoinDetailsView.routeName);
+                    });
               },
             );
           }

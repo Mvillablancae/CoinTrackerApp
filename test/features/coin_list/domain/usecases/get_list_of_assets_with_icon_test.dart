@@ -42,17 +42,14 @@ void main() {
         volume_1mthUsd: 1.0,
         priceUsd: 1)
   ];
-  final List<AssetIcon> assetIconList = [
-    const AssetIcon(assetId: 'USD', url: 'www.test.com')
-  ];
+  final List<AssetIcon> assetIconList = [const AssetIcon(assetId: 'USD', url: 'www.test.com')];
 
   final List<AssetWithIcon> assetWithIconList = [
     AssetWithIcon(asset: assetList[0], icon: assetIconList[0])
   ];
 
   test('Should get a list of assets with it\'s corresponding icon', () async {
-    when(mockCoinListRepository.getListOfAssets())
-        .thenAnswer((_) async => Right(assetList));
+    when(mockCoinListRepository.getListOfAssets()).thenAnswer((_) async => Right(assetList));
 
     when(mockCoinListRepository.getListOfAssetsIcons())
         .thenAnswer((_) async => Right(assetIconList));
@@ -71,5 +68,46 @@ void main() {
     verify(mockCoinListRepository.getListOfAssets());
     verify(mockCoinListRepository.getListOfAssetsIcons());
     verifyNoMoreInteractions(mockCoinListRepository);
+  });
+
+  test('Should get a list, each element must be a cripto', () async {
+    when(mockCoinListRepository.getListOfAssets()).thenAnswer((_) async => Right(assetList));
+
+    when(mockCoinListRepository.getListOfAssetsIcons())
+        .thenAnswer((_) async => Right(assetIconList));
+
+    final result = await usecase(NoParams());
+
+    bool isEqual = false;
+
+    result.fold((l) => null, (r) {
+      if (assetWithIconList.where((element) => element.asset.typeIsCrypto == 0).isEmpty) {
+        isEqual = true;
+      }
+    });
+
+    expect(result, isNotNull);
+    expect(isEqual, true);
+
+  });
+
+  test('Should get a list, each element must have USD price', () async {
+    when(mockCoinListRepository.getListOfAssets()).thenAnswer((_) async => Right(assetList));
+
+    when(mockCoinListRepository.getListOfAssetsIcons())
+        .thenAnswer((_) async => Right(assetIconList));
+
+    final result = await usecase(NoParams());
+
+    bool isEqual = false;
+
+    result.fold((l) => null, (r) {
+      if (assetWithIconList.where((element) => element.asset.priceUsd == null).isEmpty) {
+        isEqual = true;
+      }
+    });
+
+    expect(result, isNotNull);
+    expect(isEqual, true);
   });
 }

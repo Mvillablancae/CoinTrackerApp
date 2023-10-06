@@ -27,7 +27,8 @@ class GetListOfAssetsWithIcon extends UseCase<List<AssetWithIcon>, NoParams> {
           return const Left(ServerFailure); //Replace with Failure
         }, (assetIconList) {
           for (AssetIcon assetIcon in assetIconList) {
-            if (asset.assetId == assetIcon.assetId) {
+            if (asset.assetId == assetIcon.assetId 
+            && asset.priceUsd != null && asset.typeIsCrypto == 1)  {
               assetsWithIcons.add(AssetWithIcon(asset: asset, icon: assetIcon));
             }
           }

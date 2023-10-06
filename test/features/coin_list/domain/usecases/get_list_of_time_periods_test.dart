@@ -27,6 +27,13 @@ void main() {
 
   final List<TimePeriod> timePeriodList = [
     TimePeriod(
+        periodId: "1MIN",
+        lengthSeconds: 60,
+        lengthMonths: 0,
+        unitCount: 1,
+        unitName: "minute",
+        displayName: "1 Minutes"),
+        TimePeriod(
         periodId: "30MIN",
         lengthSeconds: 1800,
         lengthMonths: 0,
@@ -35,8 +42,7 @@ void main() {
         displayName: "30 Minutes")
   ];
 
-  test('Should get a list of time periods', () async {
-
+  test('Should get a list of time periods with unitCount equals 1', () async {
     when(mockCoinListRepository.getListOfTimePeriods())
         .thenAnswer((_) async => Right(timePeriodList));
 
@@ -45,6 +51,8 @@ void main() {
     bool isEqual = false;
 
     result.fold((l) => null, (r) {
+      print(r);
+      print(timePeriodList);
       isEqual = listEquals(r, timePeriodList);
     });
 
