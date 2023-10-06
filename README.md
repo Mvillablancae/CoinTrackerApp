@@ -4,7 +4,7 @@
   
 
 # coin_tracker_app
-##By Marcelo Villablanca
+## By Marcelo Villablanca
 
 
 This project is a cryptocurrency tracking app made with flutter that consumes coinapi.io REST API.
