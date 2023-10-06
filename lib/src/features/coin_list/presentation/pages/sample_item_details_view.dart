@@ -75,18 +75,81 @@ class CoinDetailsView extends StatelessWidget {
                           volume: 100))
                       .toList(),
                   actions: [
-                    ...provider.timePeriods.map((timePeriod) => ToolBarAction(
-                          child: Text(timePeriod.periodId),
-                          onPressed: () {
-                            provider.loadHistoricalExchangeRate(
-                                provider.selected!.asset.assetId,
-                                'USD',
-                                timePeriod.periodId,
-                                DateTime.now().subtract(const Duration(days: 1)),
-                                DateTime.now(),
-                                provider.limit);
-                          },
-                        )),
+                    ...provider.timePeriods.map((timePeriod) {
+                      ToolBarAction? toolBar;
+                      switch (timePeriod.periodId) {
+                        case "1SEC":
+                          toolBar = ToolBarAction(
+                            child: Text(timePeriod.periodId),
+                            onPressed: () {
+                              provider.loadHistoricalExchangeRate(
+                                  provider.selected!.asset.assetId,
+                                  'USD',
+                                  timePeriod.periodId,
+                                  DateTime.now().subtract(Duration(seconds: provider.limit + 1)),
+                                  DateTime.now(),
+                                  provider.limit);
+                            },
+                          );
+                          break;
+                        case "1MIN":
+                          toolBar = ToolBarAction(
+                            child: Text(timePeriod.periodId),
+                            onPressed: () {
+                              provider.loadHistoricalExchangeRate(
+                                  provider.selected!.asset.assetId,
+                                  'USD',
+                                  timePeriod.periodId,
+                                  DateTime.now().subtract(Duration(minutes: provider.limit + 1)),
+                                  DateTime.now(),
+                                  provider.limit);
+                            },
+                          );
+                          break;
+                        case "1HRS":
+                          toolBar = ToolBarAction(
+                            child: Text(timePeriod.periodId),
+                            onPressed: () {
+                              provider.loadHistoricalExchangeRate(
+                                  provider.selected!.asset.assetId,
+                                  'USD',
+                                  timePeriod.periodId,
+                                  DateTime.now().subtract(Duration(hours: provider.limit + 1)),
+                                  DateTime.now(),
+                                  provider.limit);
+                            },
+                          );
+                          break;
+                        case "1DAY":
+                          toolBar = ToolBarAction(
+                            child: Text(timePeriod.periodId),
+                            onPressed: () {
+                              provider.loadHistoricalExchangeRate(
+                                  provider.selected!.asset.assetId,
+                                  'USD',
+                                  timePeriod.periodId,
+                                  DateTime.now().subtract(Duration(days: provider.limit + 1)),
+                                  DateTime.now(),
+                                  provider.limit);
+                            },
+                          );
+                          break;
+                        default:
+                          return ToolBarAction(
+                            child: Text(timePeriod.periodId),
+                            onPressed: () {
+                              provider.loadHistoricalExchangeRate(
+                                  provider.selected!.asset.assetId,
+                                  'USD',
+                                  timePeriod.periodId,
+                                  DateTime.now().subtract(const Duration(days: 1)),
+                                  DateTime.now(),
+                                  provider.limit);
+                            },
+                          );
+                      }
+                      return toolBar;
+                    }),
                   ],
                   // onLoadMoreCandles: loadMoreCandles,
                   // onRemoveIndicator: (String indicator) {
